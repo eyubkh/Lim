@@ -1,13 +1,10 @@
-export default function DisplayText({ text, ...props }) {
-  return (
-    <>
-      <p className={text}>{text}</p>
-      <style jsx>{`
-        .${text} {
-          text-align: ${props.subTitle ? 'right' : 'left'};
-          font-size: ${props.title ? '16px' : '14px'};
-        }
-      `}</style>
-    </>
-  )
+import styled from 'styled-components'
+
+const Component = styled.p`
+  text-align: ${(props) => (props.subTitle ? 'right' : 'left')};
+  font-size: ${(props) => (props.title ? '16px' : '14px')};
+`
+
+export default function DisplayText({ children, ...props }) {
+  return <Component {...props}>{children}</Component>
 }
