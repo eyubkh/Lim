@@ -1,10 +1,12 @@
+import DisplayText from '../../atoms/displayText/DisplayText'
+
 export default function TextField({ title, subTitle }) {
   return (
     <>
       <div>
-        <label>{title}</label>
+        <DisplayText text={title} title={true} />
         <input />
-        <span>{subTitle}</span>
+        <DisplayText text={subTitle} subTitle />
       </div>
       <style jsx>{`
         div {

@@ -1,9 +1,9 @@
 export default function DisplayText({ text, ...props }) {
   return (
     <>
-      <p>{text}</p>
+      <p className={text}>{text}</p>
       <style jsx>{`
-        p {
+        .${text} {
           text-align: ${props.subTitle ? 'right' : 'left'};
           font-size: ${props.title ? '16px' : '14px'};
         }
