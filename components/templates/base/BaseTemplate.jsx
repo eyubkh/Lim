@@ -1,3 +1,3 @@
 export default function BaseTemplate({ sampleTextProp }) {
-  return <div>{sampleTextProp}</div>
+  return <div>{sampleTextProp} test</div>
 }
