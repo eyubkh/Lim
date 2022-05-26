@@ -1,5 +1,5 @@
 export const mocksDisplayTextProps = {
-  text: 'Default',
+  children: 'Default',
   title: true,
   subTitle: true,
 }
