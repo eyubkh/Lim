@@ -1,16 +1,21 @@
-import BaseTemplate from './BaseTemplate'
+import Component from './BaseTemplate'
 import { mocksBaseTemplateProps } from './BaseTemplate.mocks'
 
 export default {
   title: 'templates/base',
-  component: BaseTemplate,
+  component: Component,
   argTypes: {},
+  parameters: {
+    design: {
+      type: 'figma',
+      url: '',
+    },
+  },
 }
 
-const Template = (props) => <BaseTemplate {...props} />
+const Template = (props) => <Component {...props} />
 
 export const Base = Template.bind()
-console.log(mocksBaseTemplateProps)
 Base.args = {
   ...mocksBaseTemplateProps,
 }
