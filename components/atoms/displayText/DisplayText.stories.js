@@ -13,7 +13,9 @@ export default {
   },
 }
 
-const Template = (props) => <Component {...props} />
+const Template = ({ children, ...props }) => (
+  <Component {...props}>{children}</Component>
+)
 
 export const DisplayText = Template.bind()
 DisplayText.args = {
