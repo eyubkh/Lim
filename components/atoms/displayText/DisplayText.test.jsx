@@ -4,19 +4,17 @@ import DisplayText from './DisplayText'
 import { mocksDisplayTextProps } from './DisplayText.mocks'
 
 describe('<DisplayText />', () => {
+  const { text, title, subTitle } = mocksDisplayTextProps
   test('title', () => {
-    const { title, text } = mocksDisplayTextProps
-    const component = render(<DisplayText title={title} text={text} />)
-    expect(component.getByText(text)).toHaveStyle(`
-      text-align: left; 
-      font-size: 16px;
-    `)
+    const component = render(<DisplayText title={title}>{text}</DisplayText>)
+    expect(component.getByText(text)).toHaveStyle('text-align: left')
   })
   test('subTitle', () => {
-    const { subTitle, text } = mocksDisplayTextProps
-    const component = render(<DisplayText subTitle={subTitle} text={text} />)
+    const component = render(
+      <DisplayText subTitle={subTitle}>{text}</DisplayText>
+    )
     expect(component.getByText(text)).toHaveStyle(`
-      text-align: right; 
+      text-align: right;
       font-size: 14px;
     `)
   })
