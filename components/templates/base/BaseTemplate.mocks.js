@@ -1,7 +1,7 @@
 const base = {
-    samepleTextProp: 'default',
+  samepleTextProp: 'default',
 }
 
 export const mocksBaseTemplateProps = {
-    base,
+  base,
 }

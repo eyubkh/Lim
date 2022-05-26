@@ -1,6 +1,6 @@
 {
-    "extends": ["plugin:storybook/recommended", "next/core-web-vitals"],
-    "rules": {
-        "import/no-anonymous-default-export": "off"
-    }
+  "extends": ["plugin:storybook/recommended", "next/core-web-vitals"],
+  "rules": {
+    "import/no-anonymous-default-export": "off"
+  }
 }
