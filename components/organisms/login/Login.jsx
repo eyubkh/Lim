@@ -1,24 +1,25 @@
 import styled from 'styled-components'
 import Button from '../../atoms/button/Button'
+import DisplayText from '../../atoms/displayText/DisplayText'
 import TextField from '../../molecules/textField/TextField'
 
 const Component = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  height: 100vh;
+  height: 80vh;
 `
 const Svg = () => (
   <svg
-    width="34.5mm"
-    height="34.5mm"
+    width="24.5mm"
+    height="24.5mm"
     version="1.1"
     viewBox="0 0 34.5 34.500001"
   >
     <g
       transform="matrix(-2,0,0,-2,272.47036,360.58721)"
-      style={{ fill: '#55f8a1' }}
+      style={{ fill: '#000000' }}
     >
       <g transform="translate(-.29978122)">
         <g transform="matrix(.75000001 0 0 .75000001 -43.758395 50.237592)">
@@ -38,7 +39,8 @@ const Svg = () => (
       y="20.835764"
       style={{
         fill: '#000000',
-        fontFamily: ' Rounded Mplus 1c, Arial, sans-serif',
+        fontFamily: 'Poppins, sans-serif',
+        fontWeight: 'bold',
         fontSize: '10.5833px',
         lineHeight: '1.25',
         strokeWidth: '.264583',
@@ -56,9 +58,14 @@ export default function Login() {
     <Component>
       <Svg />
       <h2>Your social network.</h2>
-      <TextField title="User name or Email" />
-      <TextField title="Password" subTitle="Forgot password?" />
+      <div>
+        <TextField title="User name or Email" />
+        <TextField title="Password" subTitle="Forgot password?" />
+      </div>
       <Button text={'Login'} />
+      <DisplayText element="p" size="regular">
+        New in Lim? Create account
+      </DisplayText>
     </Component>
   )
 }

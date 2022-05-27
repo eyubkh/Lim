@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import DisplayText from '../../atoms/displayText/DisplayText'
 
 const Component = styled.div`
-  text-align: left;
+  margin-bottom: 20px;
 `
 const Input = styled.input`
   width: 300px;

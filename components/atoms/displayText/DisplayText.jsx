@@ -14,6 +14,7 @@ const Component = styled.p`
         return '16px'
     }
   }};
+  margin-bottom: 5px;
 `
 
 export default function DisplayText({ children, size, element }) {
