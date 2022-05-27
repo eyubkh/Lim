@@ -1,14 +1,21 @@
 import Component from './DisplayText'
-import { mocksDisplayTextProps } from './DisplayText.mocks'
+import {
+  elementRules,
+  mocksDisplayTextProps,
+  sizeRules,
+} from './DisplayText.mocks'
 
 export default {
   title: 'web/atoms',
   component: Component,
-  argTypes: {},
-  parameters: {
-    design: {
-      type: 'figma',
-      url: '',
+  argTypes: {
+    size: {
+      options: sizeRules,
+      control: { type: 'radio' },
+    },
+    element: {
+      options: elementRules,
+      control: { type: 'radio' },
     },
   },
 }
