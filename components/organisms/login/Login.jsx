@@ -1,15 +1,8 @@
-import styled from 'styled-components'
 import Button from '../../atoms/button/Button'
 import DisplayText from '../../atoms/displayText/DisplayText'
+import StyleText from '../../atoms/styleText/StyleText'
 import TextField from '../../molecules/textField/TextField'
 
-const Component = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  height: 80vh;
-`
 const Svg = () => (
   <svg
     width="24.5mm"
@@ -53,19 +46,24 @@ const Svg = () => (
     </text>
   </svg>
 )
-export default function Login() {
+export default function Login({ setForm }) {
+  const handler = (event) => {
+    event.preventDefault()
+    setForm('singup')
+  }
   return (
-    <Component>
+    <form>
       <Svg />
       <h2>Your social network.</h2>
-      <div>
-        <TextField title="User name or Email" />
-        <TextField title="Password" subTitle="Forgot password?" />
-      </div>
+      <TextField title="User name or Email" />
+      <TextField title="Password" subTitle="Forgot password?" />
       <Button text={'Login'} />
-      <DisplayText element="p" size="regular">
-        New in Lim? Create account
+      <DisplayText size="regular">
+        New in Lim?
+        <a style={{ cursor: 'pointer', marginLeft: '4px' }} onClick={handler}>
+          <StyleText bold>Create account</StyleText>
+        </a>
       </DisplayText>
-    </Component>
+    </form>
   )
 }
