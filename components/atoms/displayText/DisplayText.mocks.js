@@ -1,8 +1,7 @@
 export const mocksDisplayTextProps = {
   children: 'Default',
   size: 'regular',
-  element: 'h1',
+  right: false,
 }
 
-export const sizeRules = ['regular', 'small', 'large']
-export const elementRules = ['h1', 'h2', 'p']
+export const sizeRules = ['regular', 'small']

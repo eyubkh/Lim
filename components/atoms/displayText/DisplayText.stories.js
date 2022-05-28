@@ -1,9 +1,5 @@
 import Component from './DisplayText'
-import {
-  elementRules,
-  mocksDisplayTextProps,
-  sizeRules,
-} from './DisplayText.mocks'
+import { mocksDisplayTextProps, sizeRules } from './DisplayText.mocks'
 
 export default {
   title: 'web/atoms',
@@ -11,10 +7,6 @@ export default {
   argTypes: {
     size: {
       options: sizeRules,
-      control: { type: 'radio' },
-    },
-    element: {
-      options: elementRules,
       control: { type: 'radio' },
     },
   },

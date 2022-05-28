@@ -1,30 +1,18 @@
 import styled from 'styled-components'
-import { elementRules, sizeRules } from './DisplayText.mocks'
+import { sizeRules } from './DisplayText.mocks'
 
 const Component = styled.p`
-  font-size: ${({ size }) => {
-    switch (size) {
-      case 'regular':
-        return '16px'
-      case 'small':
-        return '12px'
-      case 'large':
-        return '24px'
-      default:
-        return '16px'
-    }
-  }};
-  margin-bottom: 5px;
+  font-size: ${({ size }) => (size === 'small' ? '10px' : '17px')};
+  text-align: ${({ right }) => (right ? 'right' : 'left')};
 `
 
-export default function DisplayText({ children, size, element }) {
+export default function DisplayText({ children, size, ...props }) {
   size?.toLowerCase()
-  element?.toLowerCase()
-  if (!sizeRules.includes(size) || !elementRules.includes(element)) {
-    console.warn(`Size (${size}) or Element (${element}) prop is wrong...`)
+  if (!sizeRules.includes(size)) {
+    console.warn(`Size (${size}) prop is not specified...`)
   }
   return (
-    <Component as={element} size={size}>
+    <Component {...props} size={size}>
       {children}
     </Component>
   )
