@@ -10,11 +10,11 @@ const Input = styled.input`
   margin-top: 5px;
 `
 
-export default function TextField({ title, subTitle }) {
+export default function TextField({ title, subTitle, ...props }) {
   return (
     <div>
       <DisplayText size="regular">{title}</DisplayText>
-      <Input />
+      <Input {...props} />
       <DisplayText size="small" right>
         {subTitle}
       </DisplayText>
