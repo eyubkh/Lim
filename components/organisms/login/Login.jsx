@@ -51,12 +51,32 @@ export default function Login({ setForm }) {
     event.preventDefault()
     setForm('singup')
   }
+  const submitHandler = (event) => {
+    event.preventDefault()
+    const inputObject = [...event.target]
+      .filter((input) => input.type !== 'submit')
+      .map((input) => {
+        const { type, value } = input
+        if (type === 'text') type = 'username'
+        return {
+          [type]: value,
+        }
+      })
+    const object = Object.assign(...inputObject)
+    window.fetch('/api/user', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(object),
+    })
+  }
   return (
-    <form>
+    <form onSubmit={submitHandler}>
       <Svg />
       <h2>Your social network.</h2>
-      <TextField title="User name or Email" />
-      <TextField title="Password" subTitle="Forgot password?" />
+      <TextField type="text" title="User name or Email" />
+      <TextField type="password" title="Password" subTitle="Forgot password?" />
       <Button text={'Login'} />
       <DisplayText size="regular">
         New in Lim?
