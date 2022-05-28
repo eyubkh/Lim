@@ -7,3 +7,10 @@ body,
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  align-items: center;
+}
