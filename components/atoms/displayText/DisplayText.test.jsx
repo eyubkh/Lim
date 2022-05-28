@@ -4,11 +4,11 @@ import DisplayText from './DisplayText'
 import { mocksDisplayTextProps } from './DisplayText.mocks'
 
 describe('<DisplayText />', () => {
-  const { children, ...props } = mocksDisplayTextProps
+  const { children, size } = mocksDisplayTextProps
+  const { container } = render(
+    <DisplayText size={size}>{children}</DisplayText>
+  )
   test('rendernig children', () => {
-    const { container } = render(
-      <DisplayText {...props}>{children}</DisplayText>
-    )
     expect(container).toHaveTextContent(children)
   })
 })
