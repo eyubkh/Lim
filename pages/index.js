@@ -1,6 +1,8 @@
 import Head from 'next/head'
+import { useState } from 'react'
 import styled from 'styled-components'
 import Login from '../components/organisms/login/Login'
+import Singup from '../components/organisms/singup/Singup'
 
 const Component = styled.main`
   display: grid;
@@ -21,6 +23,7 @@ const Bg = styled.div`
   background-size: 59px;
 `
 export default function Home() {
+  const [stateForm, setForm] = useState('')
   return (
     <>
       <Head>
@@ -30,7 +33,11 @@ export default function Home() {
       </Head>
       <Component>
         <Bg />
-        <Login />
+        {stateForm === 'singup' ? (
+          <Singup setForm={setForm} />
+        ) : (
+          <Login setForm={setForm} />
+        )}
       </Component>
     </>
   )
