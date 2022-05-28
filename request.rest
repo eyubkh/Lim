@@ -1,0 +1,10 @@
+GET http://localhost:3000/api/user/
+
+###
+POST  http://localhost:3000/api/user/
+Content-Type: application/json
+
+{
+    "username": "teseeeeFromRest",
+    "password": "rest"
+}
