@@ -1,8 +1,9 @@
 export default {
   Query: {
-    test() {
+    test(root, args, ctx) {
+      console.log(ctx)
+      if (!ctx) return null
       return 'test'
     },
   },
-  Mutation: {},
 }
