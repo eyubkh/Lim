@@ -1,12 +1,12 @@
 import Component from './Icon'
-import { mocksIconProps } from './Icon.mocks'
+import { iconRules, mocksIconProps } from './Icon.mocks'
 
 export default {
   title: 'web/atoms',
   component: Component,
   argTypes: {
     icon: {
-      options: ['default', 'like'],
+      options: iconRules,
       control: { type: 'radio' },
     },
   },
