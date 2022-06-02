@@ -17,7 +17,7 @@ const handler = async (request, response) => {
       const token = jwt.sign(object, process.env.JWT_KEY)
       response.send({ jwt: token })
     } else {
-      throw Error()
+      throw TypeError()
     }
   } catch (error) {
     errorHandler(error, response)
