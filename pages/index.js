@@ -1,5 +1,6 @@
 import Head from 'next/head'
-import { useState } from 'react'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Login from '../components/organisms/login/Login'
 import Singup from '../components/organisms/singup/Singup'
@@ -22,8 +23,13 @@ const Bg = styled.div`
   background-position: right;
   background-size: 59px;
 `
-export default function Home() {
+function Home() {
+  const router = useRouter()
   const [stateForm, setForm] = useState('')
+  useEffect(() => {
+    const token = window.localStorage.getItem('token')
+    if (token) router.push('/home')
+  })
   return (
     <>
       <Head>
@@ -42,3 +48,5 @@ export default function Home() {
     </>
   )
 }
+
+export default Home
