@@ -7,7 +7,6 @@ import connectDB from '../../middleware/mongodb'
 const cors = Cors()
 
 const apolloServer = new ApolloServer({ typeDefs, resolvers })
-
 const startServer = apolloServer.start()
 
 const handler = cors(async (req, res) => {
