@@ -10,7 +10,9 @@ export default gql`
   }
 
   type Query {
-    user(username: String): User
     get: Get
+  }
+  type Mutation {
+    user(username: String): User
   }
 `
