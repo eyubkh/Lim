@@ -1,15 +1,34 @@
 import { ApolloServer } from 'apollo-server-micro'
+import jwt from 'jsonwebtoken'
 import Cors from 'micro-cors'
 import resolvers from '../../graphql/resolvers'
 import typeDefs from '../../graphql/typeDefs'
 import connectDB from '../../middleware/mongodb'
 
 const cors = Cors()
-
-const apolloServer = new ApolloServer({ typeDefs, resolvers })
+async function getToken(token) {
+  token = token.split(' ')[1]
+  const object = jwt.verify(token, process.env.JWT_KEY)
+  return object
+}
+const apolloServer = new ApolloServer({
+  typeDefs,
+  resolvers,
+  csrfPrevention: true,
+  context: async ({ req }) => {
+    const token = req.headers.authorization || ''
+    return await getToken(token)
+  },
+})
 const startServer = apolloServer.start()
 
-const handler = cors(async (req, res) => {
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+}
+
+const handler = async (req, res) => {
   if (req.method === 'OPTIONS') {
     res.end()
     return false
@@ -18,12 +37,6 @@ const handler = cors(async (req, res) => {
   await apolloServer.createHandler({
     path: '/api/graphql',
   })(req, res)
-})
-
-export default connectDB(handler)
-
-export const config = {
-  api: {
-    bodyParser: false,
-  },
 }
+
+export default connectDB(cors(handler))
