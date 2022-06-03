@@ -4,6 +4,7 @@ import { sizeRules } from './DisplayText.mocks'
 const Component = styled.p`
   font-size: ${({ size }) => (size === 'small' ? '10px' : '17px')};
   text-align: ${({ right }) => (right ? 'right' : 'left')};
+  margin: 0;
 `
 
 export default function DisplayText({ children, size, ...props }) {
