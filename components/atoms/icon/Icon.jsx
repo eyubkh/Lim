@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import DisplayText from '../displayText/DisplayText'
 
 const icons = {
   like: () => {
@@ -18,10 +19,18 @@ const icons = {
   default: () => <p>Select an icon</p>,
 }
 
-const Component = styled.div`
+const Component = styled.span`
   width: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `
 
-export default function Icon({ icon }) {
-  return <Component>{icons[icon]()}</Component>
+export default function Icon({ icon, count }) {
+  return (
+    <Component>
+      {icons[icon]()}
+      <DisplayText size={'small'}>{count}</DisplayText>
+    </Component>
+  )
 }
