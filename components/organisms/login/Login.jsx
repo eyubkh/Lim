@@ -31,23 +31,17 @@ export default function Login({ setForm }) {
     }
   }
   return (
-    <>
-      <form onSubmit={formSubmitHandler}>
-        <h2>Your social network.</h2>
-        <TextField type="text" title="User name or Email" />
-        <TextField
-          type="password"
-          title="Password"
-          subTitle="Forgot password?"
-        />
-        <Button text={'Login'} />
-        <DisplayText size="regular">
-          New in Lim?
-          <a style={{ cursor: 'pointer', marginLeft: '4px' }} onClick={handler}>
-            <StyleText bold>Create account</StyleText>
-          </a>
-        </DisplayText>
-      </form>
-    </>
+    <form onSubmit={formSubmitHandler}>
+      <h2>Your social network.</h2>
+      <TextField type="text" title="User name or Email" />
+      <TextField type="password" title="Password" subTitle="Forgot password?" />
+      <Button text={'Login'} />
+      <DisplayText size="regular">
+        New in Lim?
+        <a style={{ cursor: 'pointer', marginLeft: '4px' }} onClick={handler}>
+          <StyleText bold>Create account</StyleText>
+        </a>
+      </DisplayText>
+    </form>
   )
 }
