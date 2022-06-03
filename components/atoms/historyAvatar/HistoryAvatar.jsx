@@ -4,7 +4,7 @@ const Component = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  & image {
+  & div {
     background-color: blue;
     width: 44px;
     height: 44px;
@@ -15,7 +15,7 @@ const Component = styled.div`
 export default function HistoryAvatar({ text }) {
   return (
     <Component>
-      <image />
+      <div />
       <p>{text}</p>
     </Component>
   )

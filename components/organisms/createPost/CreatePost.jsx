@@ -9,7 +9,7 @@ const Component = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  & input {
+  input {
     background-color: transparent;
     border: none;
     outline: none;
