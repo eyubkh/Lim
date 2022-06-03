@@ -1,3 +1,3 @@
 export const mocksFriendAvatarProps = {
-  text: 'Default',
+  username: 'Default',
 }

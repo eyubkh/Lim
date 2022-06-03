@@ -1,5 +1,7 @@
 import styled from 'styled-components'
+import DisplayText from '../../atoms/displayText/DisplayText'
 import Icon from '../../atoms/icon/Icon'
+import StyleText from '../../atoms/styleText/StyleText'
 
 const Components = styled.div`
   display: flex;
@@ -7,7 +9,7 @@ const Components = styled.div`
   gap: 26px;
   align-items: center;
 
-  & image {
+  div {
     width: 132px;
     height: 132px;
     border-radius: 51px;
@@ -15,10 +17,13 @@ const Components = styled.div`
   }
 `
 
-export default function UserAvatar() {
+export default function UserAvatar({ username }) {
   return (
     <Components>
-      <image />
+      <div />
+      <DisplayText size={'regular'}>
+        <StyleText bold>{username}</StyleText>
+      </DisplayText>
       <Icon icon={'like'} />
     </Components>
   )

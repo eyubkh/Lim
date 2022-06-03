@@ -6,7 +6,7 @@ import { mocksFriendAvatarProps } from './FriendAvatar.mocks'
 describe('<FriendAvatar />', () => {
   test('mocking test pass', () => {
     const component = render(<FriendAvatar {...mocksFriendAvatarProps} />)
-    const mock = mocksFriendAvatarProps.text
+    const mock = mocksFriendAvatarProps.username
     expect(component.container).toHaveTextContent(mock)
   })
 })

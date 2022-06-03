@@ -1,1 +1,3 @@
-export const mocksUserAvatarProps = {}
+export const mocksUserAvatarProps = {
+  username: 'Default',
+}
