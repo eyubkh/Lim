@@ -8,3 +8,11 @@ Content-Type: application/json
     "username": "ayubkh",
     "password": "ayubkh"
 }
+###
+POST  http://localhost:3000/api/singup
+Content-Type: application/json
+
+{
+    "username": "test2",
+    "password": "test"
+}
