@@ -1,8 +1,16 @@
 import { useRouter } from 'next/router'
+import styled from 'styled-components'
 import Button from '../../atoms/button/Button'
 import DisplayText from '../../atoms/displayText/DisplayText'
 import StyleText from '../../atoms/styleText/StyleText'
 import TextField from '../../molecules/textField/TextField'
+
+const Component = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  align-items: center;
+`
 
 export default function Login({ setForm }) {
   const router = useRouter()
@@ -31,7 +39,7 @@ export default function Login({ setForm }) {
     }
   }
   return (
-    <form onSubmit={formSubmitHandler}>
+    <Component onSubmit={formSubmitHandler}>
       <h2>Your social network.</h2>
       <TextField type="text" title="User name or Email" />
       <TextField type="password" title="Password" subTitle="Forgot password?" />
@@ -42,6 +50,6 @@ export default function Login({ setForm }) {
           <StyleText bold>Create account</StyleText>
         </a>
       </DisplayText>
-    </form>
+    </Component>
   )
 }
