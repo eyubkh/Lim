@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import styled from 'styled-components'
 import DisplayText from '../../atoms/displayText/DisplayText'
 import Icon from '../../atoms/icon/Icon'
@@ -12,22 +13,29 @@ const UserPostAvatar = styled.div`
   display: flex;
   align-items: center;
   gap: 17px;
-  div {
-    width: 44px;
-    height: 44px;
-    background-color: blue;
+  img {
     border-radius: 17px;
   }
 `
+
+const myLoader = ({ src, width, quality }) => {
+  return `https://${src}/${width}`
+}
 
 export default function UserPostInfo({ username, iat, likeCount }) {
   return (
     <Component>
       <UserPostAvatar>
-        <div />
+        <Image
+          loader={myLoader}
+          src={'picsum.photos/'}
+          width={44}
+          height={44}
+          alt={'post user avatar'}
+        />
         <section>
           <DisplayText size={'regular'}>{username}</DisplayText>
-          <DisplayText size={'small'}>now</DisplayText>
+          <DisplayText size={'small'}>{iat}</DisplayText>
         </section>
       </UserPostAvatar>
       <Icon icon={'like'} count={likeCount} />

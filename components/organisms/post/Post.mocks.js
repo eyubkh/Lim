@@ -1,6 +1,6 @@
 export const mocksPostProps = {
   text: 'Default',
-  username: 'Defalut',
-  iat: new Date(),
+  username: 'Default',
+  iat: '0',
   likeCount: 49,
 }
