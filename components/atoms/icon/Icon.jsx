@@ -16,7 +16,7 @@ const icons = {
       </svg>
     )
   },
-  default: () => <p>Select an icon</p>,
+  default: () => <span>Select an icon</span>,
 }
 
 const Component = styled.span`
