@@ -7,12 +7,12 @@ import User from '../../../models/user'
 const handler = async (request, response) => {
   const { username, password } = request.body
   try {
-    const { profile, id } = await User.findOne({ 'profile.username': username })
-    const isCorrect = await bcrypt.compare(password, profile.password)
+    const { password: passHash, id } = await User.findOne({ username })
+    const isCorrect = await bcrypt.compare(password, passHash)
     if (isCorrect) {
       const object = {
         username,
-        password: profile.password,
+        password: passHash,
         id,
       }
       const token = jwt.sign(object, process.env.JWT_KEY)
