@@ -1,10 +1,11 @@
-import { gql, useQuery } from '@apollo/client'
+import { useQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
 import client from '../apollo-client'
 import CreatePost from '../components/organisms/createPost/CreatePost'
 import Post from '../components/organisms/post/Post'
 import SideBar from '../components/organisms/sideBar/SideBar'
+import { GET_USER } from '../utils/queries'
 
 const Component = styled.div`
   display: grid;
@@ -20,62 +21,48 @@ const Section = styled.section`
   padding: 72px 26px;
 `
 
-export const GET_USER = gql`
-  query user {
-    user {
-      profile {
-        id
-        username
-      }
-      posts {
-        id
-        username
-        likes
-        text
-        time
-      }
-    }
-  }
-`
-
-function getStringTimeIat(iat) {
-  const now = Math.round((Date.now() - iat) / 60000)
-  return `${Math.round(now / 60)}h ago`
-}
-
 export default function Home() {
   const { data, loading, error } = useQuery(GET_USER)
   const router = useRouter()
-  const logOutHandler = async (event) => {
+
+  const logOutHandler = async () => {
     window.localStorage.removeItem('token')
     await client.clearStore()
     router.push('/')
   }
-  if (error) {
-    window.localStorage.removeItem('token')
-    router.push('/')
-    return <>error</>
-  }
+  // if (error) {
+  //   window.localStorage.removeItem('token')
+  //   router.push('/')
+  //   return <>error</>
+  // }
   if (loading) return <p>Cagando...</p>
+  const friendPost = data.userData.friends.map((user) => user.posts)
+  const userPost = data.userData.posts
+  const allPost = [...userPost, ...friendPost.flat(2)]
+  console.log(allPost)
   return (
     <Component>
-      <SideBar username={data?.user.profile.username} />
+      <SideBar
+        username={data?.userData.username}
+        imagePath={data?.userData.imgPath}
+        friends={data?.userData.friends}
+      />
       <Section>
         <CreatePost />
         <button onClick={logOutHandler}>log out</button>
-        {data?.user.posts
-          .map((post) => {
-            return (
-              <Post
-                key={post.id}
-                text={post.text}
-                iat={getStringTimeIat(post.time)}
-                username={post.username}
-                likeCount={post.likes}
-              />
-            )
-          })
-          .reverse()}
+        {allPost.map((post) => {
+          return (
+            <Post
+              id={post.id}
+              key={post.id}
+              image={post.user.imgPath}
+              username={post.user.username}
+              iat={post.iat}
+              likeCount={post.likeCount}
+              text={post.text}
+            />
+          )
+        })}
       </Section>
     </Component>
   )
