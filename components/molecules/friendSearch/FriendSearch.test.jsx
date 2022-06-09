@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
 
-describe('<SideBar />', () => {
+describe('<FriendSearch />', () => {
   test('mocking test pass', () => {})
 })
