@@ -2,4 +2,4 @@ export const mocksIconProps = {
   icon: 'default',
 }
 
-export const iconRules = ['default', 'like', 'add']
+export const iconRules = ['default', 'like', 'add', 'search']
