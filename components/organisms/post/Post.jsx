@@ -10,10 +10,16 @@ const Component = styled.div`
   border-radius: 26px;
 `
 
-export default function Post({ text, username, iat, likeCount }) {
+export default function Post({ text, id, image, username, iat, likeCount }) {
   return (
     <Component>
-      <UserPostInfo username={username} iat={iat} likeCount={likeCount} />
+      <UserPostInfo
+        id={id}
+        username={username}
+        iat={iat}
+        likeCount={likeCount}
+        image={image}
+      />
       <DisplayText size={'regular'}>{text}</DisplayText>
     </Component>
   )
