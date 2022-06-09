@@ -1,5 +1,7 @@
 import Image from 'next/image'
+import { useState } from 'react'
 import styled from 'styled-components'
+import sendImage from '../../../utils/sendImage'
 import DisplayText from '../../atoms/displayText/DisplayText'
 import Icon from '../../atoms/icon/Icon'
 import StyleText from '../../atoms/styleText/StyleText'
@@ -16,22 +18,30 @@ const Components = styled.div`
     border-radius: 51px;
     background-color: blue;
   }
+  label {
+    width: 30px;
+    height: 30px;
+    background-color: blue;
+    position: absolute;
+    cursor: pointer;
+  }
+  input {
+    display: none;
+  }
 `
 
-const myLoader = ({ src, width, quality }) => {
-  return `https://${src}/${width}`
-}
-
-export default function UserAvatar({ username }) {
+export default function UserAvatar({ username, imagePath }) {
+  const [image, setImage] = useState(imagePath)
+  const fileHandler = async (event) => {
+    let image = event.target.files[0]
+    const result = await sendImage(image)
+    setImage(result)
+  }
   return (
     <Components>
-      <Image
-        loader={myLoader}
-        src={'picsum.photos/'}
-        alt="user image"
-        width={132}
-        height={132}
-      />
+      <Image src={image} alt="user image" width={132} height={132} />
+      <label htmlFor={'file-update'} />
+      <input onChange={fileHandler} type={'file'} id={'file-update'} />
       <DisplayText size={'regular'}>
         <StyleText bold>{username}</StyleText>
       </DisplayText>
