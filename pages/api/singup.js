@@ -5,17 +5,19 @@ import connectDB from '../../middleware/mongodb'
 import User from '../../models/user'
 
 const handler = async (request, response) => {
-  const { username, password } = request.body
+  const { email, username, password } = request.body
   try {
-    const exist = await User.findOne({ 'profile.username': username })
+    const exist = await User.findOne({ username: username })
     if (exist) throw TypeError('username taken')
     const passHash = await bcrypt.hash(password, 10)
     const newUser = new User({
-      profile: {
-        username,
-        password: passHash,
-      },
-      posts: [{}],
+      username,
+      password: passHash,
+      imgPath:
+        'https://s3.eu-west-2.amazonaws.com/lim.project.s3.bucket/1654602370293549-200x200.jpg',
+      likes: [],
+      friends: [],
+      posts: [],
     })
     await newUser
       .save()
@@ -25,9 +27,10 @@ const handler = async (request, response) => {
       .catch((error) => {
         throw Error(error)
       })
+    console.log(newUser)
     const jwtPlainObject = {
-      username: newUser.profile.username,
-      password: newUser.profile.password,
+      username: newUser.username,
+      password: newUser.password,
       id: newUser.id,
     }
     const jwtDecodeObject = jwt.sign(jwtPlainObject, process.env.JWT_KEY)
