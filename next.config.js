@@ -6,7 +6,7 @@ const nextConfig = {
     styledComponents: true,
   },
   images: {
-    domains: ['picsum.photos'],
+    domains: ['picsum.photos', 's3.eu-west-2.amazonaws.com'],
   },
 }
 

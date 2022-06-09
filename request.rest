@@ -1,18 +1,23 @@
 GET http://localhost:3000/api/user/
+###
+GET http://localhost:3000/api/aws/
+
+###
+GET https://my-public-bucked-lim.s3.eu-west-2.amazonaws.com/1654604646649815-144x144.jpg
 
 ###
 POST  http://localhost:3000/api/auth/login
 Content-Type: application/json
 
 {
-    "username": "ayubkh",
-    "password": "ayubkh"
+    "username": "ayub",
+    "password": "ayub"
 }
 ###
 POST  http://localhost:3000/api/singup
 Content-Type: application/json
 
 {
-    "username": "test2",
-    "password": "test"
+    "username": "daniil",
+    "password": "daniil"
 }
