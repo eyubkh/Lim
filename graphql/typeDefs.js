@@ -9,18 +9,26 @@ export default gql`
   type Post {
     id: ID
     text: String
-    time: String
-    likes: Int
-    username: String
+    likeCount: Int
+    iat: String
+    user: User
+    likes: [ID]
   }
   type User {
-    profile: Profile
+    id: ID
+    username: String
+    imgPath: String
+    friends: [User]
+    likes: [ID]
     posts: [Post]
   }
   type Query {
-    user: User
+    userData: User
   }
   type Mutation {
     createPost(text: String): Post
+    like(id: String): String
+    friendSearch(text: String): [User]
+    addFriend(id: String): String
   }
 `
