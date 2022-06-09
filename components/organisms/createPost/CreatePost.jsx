@@ -1,14 +1,7 @@
-import { gql, useMutation } from '@apollo/client'
+import { useMutation } from '@apollo/client'
 import styled from 'styled-components'
-import { GET_USER } from '../../../pages/home'
+import { CREATE_POST, GET_USER } from '../../../utils/queries'
 import Icon from '../../atoms/icon/Icon'
-const CREATE_POST = gql`
-  mutation createPost($text: String) {
-    createPost(text: $text) {
-      text
-    }
-  }
-`
 
 const Component = styled.form`
   background-color: #f3f3f3;
