@@ -5,8 +5,6 @@ const Component = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 500px;
-  height: 44px;
   input {
     border: none;
     padding: 5px 0px;
