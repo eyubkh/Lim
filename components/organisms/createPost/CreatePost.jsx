@@ -5,15 +5,15 @@ import Icon from '../../atoms/icon/Icon'
 
 const Component = styled.form`
   background-color: #f3f3f3;
-  border-radius: 26px;
-  padding: 26px 44px;
+  border-radius: 4px;
+  padding: 26px 26px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   button {
     border: none;
     outline: none;
-    background-color: #f3f3f3;
+    background-color: transparent;
     cursor: pointer;
   }
   input {
