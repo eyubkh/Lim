@@ -5,9 +5,9 @@ import UserPostInfo from '../../molecules/userPostInfo/UserPostInfo'
 const Component = styled.div`
   display: grid;
   gap: 17px;
-  padding: 26px 44px;
+  padding: 26px 26px;
   background-color: #f3f3f3;
-  border-radius: 26px;
+  border-radius: 4px;
 `
 
 export default function Post({ text, id, image, username, iat, likeCount }) {
