@@ -2,7 +2,7 @@ import Component from './FriendAvatar'
 import { mocksFriendAvatarProps } from './FriendAvatar.mocks'
 
 export default {
-  title: 'web/atoms',
+  title: 'web/molecules',
   component: Component,
   argTypes: {},
   parameters: {
@@ -14,7 +14,6 @@ export default {
 }
 
 const Template = (props) => <Component {...props} />
-
 export const FriendAvatar = Template.bind()
 FriendAvatar.args = {
   ...mocksFriendAvatarProps,
