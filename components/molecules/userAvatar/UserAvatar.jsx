@@ -7,26 +7,46 @@ import Icon from '../../atoms/icon/Icon'
 import StyleText from '../../atoms/styleText/StyleText'
 
 const Components = styled.div`
-  position: relative;
   display: flex;
-  flex-direction: column;
-  gap: 26px;
+  gap: 17px;
   align-items: center;
-
-  img {
+  overflow: hidden;
+  .avatarImage {
+    height: 72px;
+    width: 72px;
     position: relative;
-    border-radius: 51px;
-    background-color: blue;
+    border-radius: 17px;
+    overflow: hidden;
   }
-  label {
+  .avatarImage:hover label {
+    display: block;
+  }
+  .avatarImage label {
+    position: absolute;
+    box-sizing: border-box;
     width: 30px;
     height: 30px;
-    background-color: blue;
-    position: absolute;
+    background-color: transparent;
+    bottom: 0;
+    border-radius: 0px 6px 0px 0px;
     cursor: pointer;
+    display: none;
+  }
+  .avatarImage label svg {
+    width: 17px;
   }
   input {
     display: none;
+  }
+
+  .avatarName {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .avatarName span {
+    display: flex;
+    gap: 8px;
   }
 `
 
@@ -39,13 +59,23 @@ export default function UserAvatar({ username, imagePath }) {
   }
   return (
     <Components>
-      <Image src={image} alt="user image" width={132} height={132} />
-      <label htmlFor={'file-update'} />
-      <input onChange={fileHandler} type={'file'} id={'file-update'} />
-      <DisplayText size={'regular'}>
-        <StyleText bold>{username}</StyleText>
-      </DisplayText>
-      <Icon icon={'like'} />
+      <div className="avatarImage">
+        <Image src={image} alt="user image" width={132} height={132} />
+        <label htmlFor={'file-update'}>
+          <Icon fill={'#f3f3f3'} icon={'photo'} />
+        </label>
+        <input onChange={fileHandler} type={'file'} id={'file-update'} />
+      </div>
+      <div className="avatarName">
+        <DisplayText size={'regular'}>
+          <StyleText bold>{username}</StyleText>
+        </DisplayText>
+        <span>
+          <Icon icon={'user'} />
+          <Icon icon={'comment'} />
+          <Icon icon={'like'} />
+        </span>
+      </div>
     </Components>
   )
 }
