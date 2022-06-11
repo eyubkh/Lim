@@ -25,7 +25,7 @@ const Component = styled.form`
 
 export default function CreatePost({}) {
   const [createPost] = useMutation(CREATE_POST, {
-    refetchQueries: [{ query: GET_USER }, 'user'],
+    refetchQueries: [{ query: GET_USER }, 'getUserData'],
   })
   const sumbitHandler = (event) => {
     event.preventDefault()

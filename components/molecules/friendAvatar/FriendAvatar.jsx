@@ -11,16 +11,22 @@ const Component = styled.div`
   align-items: center;
   div {
     display: flex;
+    align-items: center;
     gap: 17px;
   }
   div img {
     border-radius: 17px;
   }
+  button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
 `
 
 export default function FriendAvatar({ username, imagePath, id, isFriend }) {
   const [add] = useMutation(ADD_FRIEND, {
-    refetchQueries: [{ query: GET_USER }, 'user'],
+    refetchQueries: [{ query: GET_USER }, 'getUserData'],
   })
   const addFriend = (event) => {
     event.preventDefault()
