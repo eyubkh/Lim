@@ -5,6 +5,7 @@ export const GET_USER = gql`
     userData {
       username
       imgPath
+      likes
       friends {
         id
         username
@@ -26,6 +27,10 @@ export const GET_USER = gql`
         user {
           username
           imgPath
+        }
+        comments {
+          text
+          likes
         }
         likeCount
         likes
@@ -55,6 +60,7 @@ export const FRIEND_SEARCH = gql`
       id
       username
       imgPath
+      friends
     }
   }
 `
@@ -62,5 +68,11 @@ export const FRIEND_SEARCH = gql`
 export const ADD_FRIEND = gql`
   mutation addFriend($addFriendId: String) {
     addFriend(id: $addFriendId)
+  }
+`
+
+export const ADD_COMMENT = gql`
+  mutation addComent($text: String, $postId: ID) {
+    addComment(text: $text, postId: $postId)
   }
 `
