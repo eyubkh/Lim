@@ -14,6 +14,10 @@ const Component = styled.div`
     border: none;
     cursor: pointer;
   }
+  .icons {
+    display: flex;
+    gap: 17px;
+  }
 `
 
 const UserPostAvatar = styled.div`
@@ -25,13 +29,26 @@ const UserPostAvatar = styled.div`
   }
 `
 
-export default function UserPostInfo({ username, image, id, iat, likeCount }) {
+export default function UserPostInfo({
+  username,
+  image,
+  id,
+  iat,
+  likeCount,
+  isLiked,
+  commentCount = 0,
+  toggleComments,
+}) {
   const [like] = useMutation(LIKE, {
     refetchQueries: [{ query: GET_USER }],
   })
   const likeHandler = (event) => {
     event.preventDefault()
     like({ variables: { likeid: id } })
+  }
+  const commentHandler = (event) => {
+    event.preventDefault()
+    toggleComments()
   }
   return (
     <Component>
@@ -42,9 +59,18 @@ export default function UserPostInfo({ username, image, id, iat, likeCount }) {
           <DisplayText size={'small'}>{iat}</DisplayText>
         </section>
       </UserPostAvatar>
-      <button onClick={likeHandler}>
-        <Icon icon={'like'} count={likeCount} />
-      </button>
+      <div className={'icons'}>
+        <button onClick={commentHandler}>
+          <Icon icon={'comment'} count={commentCount} />
+        </button>
+        <button onClick={likeHandler}>
+          <Icon
+            fill={isLiked ? '#F25252' : '#333'}
+            icon={'like'}
+            count={likeCount}
+          />
+        </button>
+      </div>
     </Component>
   )
 }
