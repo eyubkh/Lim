@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
 import styled from 'styled-components'
-import { ErrorHandlerContext } from '../../../utils/errorHandlerUI'
+import { ErrorHandlerContext } from '../../../utils/errorHandlerUi'
 import Button from '../../atoms/button/Button'
 import DisplayText from '../../atoms/displayText/DisplayText'
 import StyleText from '../../atoms/styleText/StyleText'

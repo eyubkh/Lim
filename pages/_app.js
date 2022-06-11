@@ -1,7 +1,7 @@
 import { ApolloProvider } from '@apollo/client'
 import client from '../apollo-client'
 import '../styles/globals.css'
-import { ErrorHandlerProvider } from '../utils/errorHandlerUI'
+import { ErrorHandlerProvider } from '../utils/errorHandlerUi'
 
 export default function MyApp({ Component, pageProps }) {
   return (
