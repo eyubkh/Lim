@@ -6,6 +6,7 @@ import typeDefs from '../../graphql/typeDefs'
 import connectDB from '../../middleware/mongodb'
 
 const cors = Cors()
+
 async function getToken(token) {
   token = token.split(' ')[1]
   const object = jwt.verify(token, process.env.JWT_KEY)
@@ -28,7 +29,7 @@ export const config = {
   },
 }
 
-const handler = async (req, res) => {
+const handler = cors(async (req, res) => {
   if (req.method === 'OPTIONS') {
     res.end()
     return false
@@ -37,6 +38,6 @@ const handler = async (req, res) => {
   await apolloServer.createHandler({
     path: '/api/graphql',
   })(req, res)
-}
+})
 
-export default connectDB(cors(handler))
+export default connectDB(handler)
