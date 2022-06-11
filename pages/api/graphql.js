@@ -70,4 +70,4 @@ const handler = async (req, res) => {
 //   })(req, res)
 // })
 
-export default connectDB(allowCors(handler))
+export default allowCors(connectDB(handler))
