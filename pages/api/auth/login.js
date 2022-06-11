@@ -7,19 +7,18 @@ import User from '../../../models/user'
 const handler = async (request, response) => {
   const { username, password } = request.body
   try {
-    const { password: passHash, id } = await User.findOne({ username })
-    const isCorrect = await bcrypt.compare(password, passHash)
-    if (isCorrect) {
-      const object = {
-        username,
-        password: passHash,
-        id,
-      }
-      const token = jwt.sign(object, process.env.JWT_KEY)
-      response.send({ jwt: token })
-    } else {
-      throw TypeError()
+    const user = await User.findOne({ username })
+    if (!user) throw new Error('Wrong credentials')
+    const isCorrect = await bcrypt.compare(password, user.password)
+    if (!isCorrect) throw new Error('Wrong credentials')
+
+    const object = {
+      username: user.username,
+      password: user.password,
+      id: user.id,
     }
+    const token = jwt.sign(object, process.env.JWT_KEY)
+    response.send({ jwt: token })
   } catch (error) {
     errorHandler(error, response)
   }
