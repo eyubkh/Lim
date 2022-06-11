@@ -1,5 +1,7 @@
 import { useRouter } from 'next/router'
+import { useContext } from 'react'
 import styled from 'styled-components'
+import { ErrorHandlerContext } from '../../../utils/errorHandlerUI'
 import Button from '../../atoms/button/Button'
 import DisplayText from '../../atoms/displayText/DisplayText'
 import StyleText from '../../atoms/styleText/StyleText'
@@ -12,21 +14,18 @@ const Component = styled.form`
   align-items: center;
 `
 
-export default function Singup({ setForm }) {
+export default function Singup({ toggleForm }) {
   const router = useRouter()
-  const handler = async (event) => {
-    event.preventDefault()
-    setForm('')
-  }
+  const { addError } = useContext(ErrorHandlerContext)
+
   const sumbitHandler = async (event) => {
     event.preventDefault()
-
     const object = {
       email: event.target[0].value,
       username: event.target[1].value,
       password: event.target[2].value,
     }
-    const { jwt } = await window
+    const response = await window
       .fetch('/api/singup', {
         method: 'POST',
         headers: {
@@ -35,11 +34,19 @@ export default function Singup({ setForm }) {
         body: JSON.stringify(object),
       })
       .then((response) => response.json())
-    if (jwt) {
-      window.localStorage.setItem('token', jwt)
+    if (response.jwt) {
+      window.localStorage.setItem('token', response.jwt)
       router.push('/home')
+    } else {
+      addError(response.message)
     }
   }
+
+  const changeLoginState = (event) => {
+    event.preventDefault()
+    toggleForm()
+  }
+
   return (
     <Component onSubmit={sumbitHandler}>
       <h2>Your social network.</h2>
@@ -49,7 +56,10 @@ export default function Singup({ setForm }) {
       <Button text={'Singup'} />
       <DisplayText size="regular">
         Have account?
-        <a style={{ cursor: 'pointer', marginLeft: '4px' }} onClick={handler}>
+        <a
+          style={{ cursor: 'pointer', marginLeft: '4px' }}
+          onClick={changeLoginState}
+        >
           <StyleText bold>Login</StyleText>
         </a>
       </DisplayText>
