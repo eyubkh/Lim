@@ -6,11 +6,17 @@ export default gql`
     username: String
     password: String
   }
+  type Comment {
+    user: ID
+    text: String
+    likes: [ID]
+  }
   type Post {
     id: ID
     text: String
     likeCount: Int
     iat: String
+    comments: [Comment]
     user: User
     likes: [ID]
   }
@@ -22,13 +28,20 @@ export default gql`
     likes: [ID]
     posts: [Post]
   }
+  type UserSearch {
+    id: ID
+    username: String
+    friends: [ID]
+    imgPath: String
+  }
   type Query {
     userData: User
   }
   type Mutation {
     createPost(text: String): Post
     like(id: String): String
-    friendSearch(text: String): [User]
+    friendSearch(text: String): [UserSearch]
     addFriend(id: String): String
+    addComment(text: String, postId: ID): String
   }
 `
