@@ -14,6 +14,7 @@ const Component = styled.div`
     background-color: transparent;
     border: none;
     cursor: pointer;
+    transform: ${(props) => (props.search ? 'rotate(45deg)' : '')};
   }
 `
 
@@ -23,7 +24,7 @@ export default function FriendSearch({ setSearch, search, handler }) {
     setSearch(!search)
   }
   return (
-    <Component>
+    <Component search={search}>
       {search ? (
         <input
           onChange={handler}
