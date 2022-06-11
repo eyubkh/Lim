@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
+import Loading from '../components/pages/Loading'
 import UserHome from '../components/pages/UserHome'
 import { GET_USER } from '../utils/queries'
 
@@ -11,6 +12,6 @@ export default function Home() {
     router.push('/')
     return <>error</>
   }
-  if (loading) return <p>Cagando...</p>
+  if (loading) return <Loading />
   return <UserHome user={data} />
 }
