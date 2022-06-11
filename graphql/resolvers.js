@@ -1,4 +1,5 @@
 import { UserInputError } from 'apollo-server-micro'
+import Comment from '../models/comment'
 import Post from '../models/post'
 import User from '../models/user'
 
@@ -14,7 +15,27 @@ export default {
             populate: 'user',
           },
         })
-        .populate({ path: 'posts', populate: 'user' })
+        .populate({
+          path: 'friends',
+          populate: {
+            path: 'posts',
+            populate: 'comments',
+          },
+        })
+        .populate({
+          path: 'posts',
+          populate: {
+            path: 'user',
+            model: User,
+          },
+        })
+        .populate({
+          path: 'posts',
+          populate: {
+            path: 'comments',
+            model: Comment,
+          },
+        })
       if (!user) throw new UserInputError('not user found')
       return user
     },
@@ -57,7 +78,12 @@ export default {
     async friendSearch(root, args, ctx) {
       if (!ctx) return null
       const { text } = args
-      const users = User.find({ username: { $regex: text } })
+      const { friends } = await User.findById(ctx.id)
+      const users = await User.find({
+        username: { $regex: text },
+        _id: { $nin: [...friends, ctx.id] },
+      })
+      if (text.length === 0) return []
       return users
     },
     async addFriend(root, args, ctx) {
@@ -68,6 +94,20 @@ export default {
       user.friends = user.friends.concat(id)
       user.save()
       return 'user added'
+    },
+    async addComment(root, args, ctx) {
+      if (!ctx) return null
+      const { text, postId } = args
+      const newComment = new Comment({
+        user: ctx.id,
+        text,
+        likes: [],
+      })
+      const post = await Post.findById(postId)
+      post.comments = post.comments.concat(newComment.id)
+      await post.save()
+      await newComment.save()
+      return 'comment created'
     },
   },
 }
