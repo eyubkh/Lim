@@ -1,5 +1,7 @@
 import { useRouter } from 'next/router'
+import { useContext } from 'react'
 import styled from 'styled-components'
+import { ErrorHandlerContext } from '../../../utils/errorHandlerUI'
 import Button from '../../atoms/button/Button'
 import DisplayText from '../../atoms/displayText/DisplayText'
 import StyleText from '../../atoms/styleText/StyleText'
@@ -12,19 +14,16 @@ const Component = styled.form`
   align-items: center;
 `
 
-export default function Login({ setForm }) {
+export default function Login({ toggleForm }) {
   const router = useRouter()
-  const handler = (event) => {
-    event.preventDefault()
-    setForm('singup')
-  }
+  const { addError } = useContext(ErrorHandlerContext)
   const formSubmitHandler = async (event) => {
     event.preventDefault()
     const object = {
       username: event.target[0].value,
       password: event.target[1].value,
     }
-    const { jwt } = await window
+    const response = await window
       .fetch('/api/auth/login', {
         method: 'POST',
         headers: {
@@ -33,10 +32,16 @@ export default function Login({ setForm }) {
         body: JSON.stringify(object),
       })
       .then((response) => response.json())
-    if (jwt) {
-      window.localStorage.setItem('token', jwt)
+    if (response.jwt) {
+      window.localStorage.setItem('token', response.jwt)
       router.push('/home')
+    } else {
+      addError(response.message)
     }
+  }
+  const changeLoginState = (event) => {
+    event.preventDefault()
+    toggleForm()
   }
   return (
     <Component onSubmit={formSubmitHandler}>
@@ -46,7 +51,10 @@ export default function Login({ setForm }) {
       <Button text={'Login'} />
       <DisplayText size="regular">
         New in Lim?
-        <a style={{ cursor: 'pointer', marginLeft: '4px' }} onClick={handler}>
+        <a
+          style={{ cursor: 'pointer', marginLeft: '4px' }}
+          onClick={changeLoginState}
+        >
           <StyleText bold>Create account</StyleText>
         </a>
       </DisplayText>
