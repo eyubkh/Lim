@@ -35,6 +35,7 @@ export default function UserHome({ user }) {
     <Component>
       <div className="sideBar">
         <SideBar
+          id={user?.userData.id}
           username={user?.userData.username}
           imagePath={user?.userData.imgPath}
           friends={user?.userData.friends}
@@ -44,6 +45,7 @@ export default function UserHome({ user }) {
         <CreatePost />
         <button onClick={logOutHandler}>log out</button>
         {allPost.map((post) => {
+          console.log(post)
           return (
             <Post
               id={post.id}
@@ -53,6 +55,8 @@ export default function UserHome({ user }) {
               iat={post.iat}
               likeCount={post.likeCount}
               text={post.text}
+              comments={post.comments}
+              isLiked={user?.userData.likes.includes(post.id)}
             />
           )
         })}
