@@ -1,6 +1,5 @@
 import Head from 'next/head'
-import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import styled from 'styled-components'
 import Login from '../organisms/login/Login'
 import Singup from '../organisms/singup/Singup'
@@ -24,12 +23,8 @@ const Bg = styled.div`
   background-size: 59px;
 `
 export default function Portal() {
-  const router = useRouter()
-  const [stateForm, setForm] = useState('')
-  useEffect(() => {
-    const token = window.localStorage.getItem('token')
-    if (token) router.push('/home')
-  })
+  const [login, setLogin] = useState(true)
+
   return (
     <>
       <Head>
@@ -39,10 +34,10 @@ export default function Portal() {
       </Head>
       <Component>
         <Bg />
-        {stateForm === 'singup' ? (
-          <Singup setForm={setForm} />
+        {login ? (
+          <Login toggleForm={() => setLogin(!login)} />
         ) : (
-          <Login setForm={setForm} />
+          <Singup toggleForm={() => setLogin(!login)} />
         )}
       </Component>
     </>
