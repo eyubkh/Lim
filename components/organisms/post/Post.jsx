@@ -1,10 +1,11 @@
 import { useMutation } from '@apollo/client'
+import DisplayText from '@components/atoms/displayText/DisplayText'
+import UserPostInfo from '@components/molecules/userPostInfo/UserPostInfo'
+import { ADD_COMMENT } from '@graphql/client/mutation'
+import { GET_USER } from '@graphql/client/queries'
+import timeConversion from '@utils/timeConversion'
 import { useState } from 'react'
 import styled from 'styled-components'
-import { ADD_COMMENT } from '../../../utils/queries'
-import timeConversion from '../../../utils/timeConversion'
-import DisplayText from '../../atoms/displayText/DisplayText'
-import UserPostInfo from '../../molecules/userPostInfo/UserPostInfo'
 
 const Component = styled.div`
   display: grid;
@@ -30,11 +31,16 @@ export default function Post({
   isLiked,
 }) {
   const [showComments, setShowComments] = useState(false)
-  const [addComment] = useMutation(ADD_COMMENT)
+  const [addComment] = useMutation(ADD_COMMENT, {
+    refetchQueries: [{ query: GET_USER }, 'userData'],
+  })
+
   const addCommentHandler = (event) => {
     event.preventDefault()
     addComment({ variables: { text: event.target[0].value, postId: id } })
+    event.target[0].value = ''
   }
+
   return (
     <Component>
       <UserPostInfo
@@ -52,7 +58,10 @@ export default function Post({
         <>
           <hr />
           {comments.map((comment) => (
-            <p key={comment.text}>{comment.text}</p>
+            <div key={comment.id}>
+              <p style={{ fontWeight: 'bold' }}>{comment.user.username}</p>
+              <p>{comment.text}</p>
+            </div>
           ))}
         </>
       ) : null}
