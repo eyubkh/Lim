@@ -1,11 +1,12 @@
+import Button from '@components/atoms/button/Button'
+import DisplayText from '@components/atoms/displayText/DisplayText'
+import StyleText from '@components/atoms/styleText/StyleText'
+import TextField from '@components/molecules/textField/TextField'
+import { ErrorHandlerContext } from '@utils/errorHandlerUi'
+import postApiCredentials from '@utils/postApiPostCredentials'
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
 import styled from 'styled-components'
-import { ErrorHandlerContext } from '../../../utils/errorHandlerUi'
-import Button from '../../atoms/button/Button'
-import DisplayText from '../../atoms/displayText/DisplayText'
-import StyleText from '../../atoms/styleText/StyleText'
-import TextField from '../../molecules/textField/TextField'
 
 const Component = styled.form`
   display: flex;
@@ -18,22 +19,14 @@ export default function Singup({ toggleForm }) {
   const router = useRouter()
   const { addError } = useContext(ErrorHandlerContext)
 
-  const sumbitHandler = async (event) => {
+  const singupSubmitHandler = async (event) => {
     event.preventDefault()
-    const object = {
+    const formData = {
       email: event.target[0].value,
       username: event.target[1].value,
       password: event.target[2].value,
     }
-    const response = await window
-      .fetch('/api/singup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(object),
-      })
-      .then((response) => response.json())
+    const response = await postApiCredentials('api/singup', formData)
     if (response.jwt) {
       window.localStorage.setItem('token', response.jwt)
       router.push('/home')
@@ -42,13 +35,8 @@ export default function Singup({ toggleForm }) {
     }
   }
 
-  const changeLoginState = (event) => {
-    event.preventDefault()
-    toggleForm()
-  }
-
   return (
-    <Component onSubmit={sumbitHandler}>
+    <Component onSubmit={singupSubmitHandler}>
       <h2>Your social network.</h2>
       <TextField type="email" title="Email" />
       <TextField type="username" title="Username" />
@@ -58,7 +46,7 @@ export default function Singup({ toggleForm }) {
         Have account?
         <a
           style={{ cursor: 'pointer', marginLeft: '4px' }}
-          onClick={changeLoginState}
+          onClick={() => toggleForm()}
         >
           <StyleText bold>Login</StyleText>
         </a>

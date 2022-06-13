@@ -1,11 +1,12 @@
+import Button from '@components/atoms/button/Button'
+import DisplayText from '@components/atoms/displayText/DisplayText'
+import StyleText from '@components/atoms/styleText/StyleText'
+import TextField from '@components/molecules/textField/TextField'
+import { ErrorHandlerContext } from '@utils/errorHandlerUi'
+import postApiCredentials from '@utils/postApiPostCredentials'
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
 import styled from 'styled-components'
-import { ErrorHandlerContext } from '../../../utils/errorHandlerUi'
-import Button from '../../atoms/button/Button'
-import DisplayText from '../../atoms/displayText/DisplayText'
-import StyleText from '../../atoms/styleText/StyleText'
-import TextField from '../../molecules/textField/TextField'
 
 const Component = styled.form`
   display: flex;
@@ -17,21 +18,14 @@ const Component = styled.form`
 export default function Login({ toggleForm }) {
   const router = useRouter()
   const { addError } = useContext(ErrorHandlerContext)
-  const formSubmitHandler = async (event) => {
+
+  const loginSubmitHandler = async (event) => {
     event.preventDefault()
-    const object = {
+    const formData = {
       username: event.target[0].value,
       password: event.target[1].value,
     }
-    const response = await window
-      .fetch('/api/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(object),
-      })
-      .then((response) => response.json())
+    const response = await postApiCredentials('api/auth/login', formData)
     if (response.jwt) {
       window.localStorage.setItem('token', response.jwt)
       router.push('/home')
@@ -39,12 +33,9 @@ export default function Login({ toggleForm }) {
       addError(response.message)
     }
   }
-  const changeLoginState = (event) => {
-    event.preventDefault()
-    toggleForm()
-  }
+
   return (
-    <Component onSubmit={formSubmitHandler}>
+    <Component onSubmit={loginSubmitHandler}>
       <h2>Your social network.</h2>
       <TextField type="text" title="User name or Email" />
       <TextField type="password" title="Password" subTitle="Forgot password?" />
@@ -53,7 +44,7 @@ export default function Login({ toggleForm }) {
         New in Lim?
         <a
           style={{ cursor: 'pointer', marginLeft: '4px' }}
-          onClick={changeLoginState}
+          onClick={() => toggleForm()}
         >
           <StyleText bold>Create account</StyleText>
         </a>
