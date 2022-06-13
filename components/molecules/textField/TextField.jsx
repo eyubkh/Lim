@@ -1,5 +1,5 @@
+import DisplayText from '@components/atoms/displayText/DisplayText'
 import styled from 'styled-components'
-import DisplayText from '../../atoms/displayText/DisplayText'
 
 const Input = styled.input`
   width: 300px;

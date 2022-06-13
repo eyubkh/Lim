@@ -1,8 +1,8 @@
+import User from '@models/user'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import errorHandler from '../../middleware/errorHandler'
 import connectDB from '../../middleware/mongodb'
-import User from '../../models/user'
 
 const handler = async (request, response) => {
   const { email, username, password } = request.body

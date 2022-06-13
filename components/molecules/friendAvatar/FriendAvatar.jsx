@@ -1,9 +1,10 @@
 import { useMutation } from '@apollo/client'
+import DisplayText from '@components/atoms/displayText/DisplayText'
+import Icon from '@components/atoms/icon/Icon'
+import { ADD_FRIEND } from '@graphql/client/mutation'
+import { GET_USER } from '@graphql/client/queries'
 import Image from 'next/image'
 import styled from 'styled-components'
-import { ADD_FRIEND, GET_USER } from '../../../utils/queries'
-import DisplayText from '../../atoms/displayText/DisplayText'
-import Icon from '../../atoms/icon/Icon'
 
 const Component = styled.div`
   display: flex;

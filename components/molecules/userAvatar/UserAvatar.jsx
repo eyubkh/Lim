@@ -1,10 +1,10 @@
+import DisplayText from '@components/atoms/displayText/DisplayText'
+import Icon from '@components/atoms/icon/Icon'
+import StyleText from '@components/atoms/styleText/StyleText'
+import sendImage from '@utils/sendImage'
 import Image from 'next/image'
 import { useState } from 'react'
 import styled from 'styled-components'
-import sendImage from '../../../utils/sendImage'
-import DisplayText from '../../atoms/displayText/DisplayText'
-import Icon from '../../atoms/icon/Icon'
-import StyleText from '../../atoms/styleText/StyleText'
 
 const Components = styled.div`
   display: flex;

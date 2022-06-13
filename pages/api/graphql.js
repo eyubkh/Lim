@@ -1,8 +1,8 @@
+import resolvers from '@graphql/server/resolvers'
+import typeDefs from '@graphql/server/typeDefs'
 import { ApolloServer } from 'apollo-server-micro'
 import jwt from 'jsonwebtoken'
 import Cors from 'micro-cors'
-import resolvers from '../../graphql/resolvers'
-import typeDefs from '../../graphql/typeDefs'
 import connectDB from '../../middleware/mongodb'
 
 const cors = Cors()

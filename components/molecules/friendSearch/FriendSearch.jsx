@@ -1,5 +1,5 @@
+import Icon from '@components/atoms/icon/Icon'
 import styled from 'styled-components'
-import Icon from '../../atoms/icon/Icon'
 
 const Component = styled.div`
   display: flex;

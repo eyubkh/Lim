@@ -1,7 +1,8 @@
 import { useMutation } from '@apollo/client'
+import Icon from '@components/atoms/icon/Icon'
+import { CREATE_POST } from '@graphql/client/mutation'
+import { GET_USER } from '@graphql/client/queries'
 import styled from 'styled-components'
-import { CREATE_POST, GET_USER } from '../../../utils/queries'
-import Icon from '../../atoms/icon/Icon'
 
 const Component = styled.form`
   background-color: #f3f3f3;

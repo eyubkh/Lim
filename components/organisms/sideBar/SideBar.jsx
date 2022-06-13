@@ -1,10 +1,10 @@
 import { useMutation } from '@apollo/client'
+import FriendAvatar from '@components/molecules/friendAvatar/FriendAvatar'
+import FriendSearch from '@components/molecules/friendSearch/FriendSearch'
+import UserAvatar from '@components/molecules/userAvatar/UserAvatar'
 import { useState } from 'react'
 import styled from 'styled-components'
 import { FRIEND_SEARCH } from '../../../utils/queries'
-import FriendAvatar from '../../molecules/friendAvatar/FriendAvatar'
-import FriendSearch from '../../molecules/friendSearch/FriendSearch'
-import UserAvatar from '../../molecules/userAvatar/UserAvatar'
 
 const Component = styled.div`
   position: relative;

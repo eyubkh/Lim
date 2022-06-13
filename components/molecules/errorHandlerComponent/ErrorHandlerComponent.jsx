@@ -1,6 +1,6 @@
+import { ErrorHandlerContext } from '@utils/errorHandlerUi'
 import { useContext } from 'react'
 import styled from 'styled-components'
-import { ErrorHandlerContext } from '../../../utils/errorHandlerUi'
 
 const Component = styled.div`
   width: 250px;
