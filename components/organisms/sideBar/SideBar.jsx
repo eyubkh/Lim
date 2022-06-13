@@ -2,9 +2,9 @@ import { useMutation } from '@apollo/client'
 import FriendAvatar from '@components/molecules/friendAvatar/FriendAvatar'
 import FriendSearch from '@components/molecules/friendSearch/FriendSearch'
 import UserAvatar from '@components/molecules/userAvatar/UserAvatar'
+import { FRIEND_SEARCH } from '@graphql/client/mutation'
 import { useState } from 'react'
 import styled from 'styled-components'
-import { FRIEND_SEARCH } from '../../../utils/queries'
 
 const Component = styled.div`
   position: relative;

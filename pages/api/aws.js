@@ -1,8 +1,8 @@
 import User from '@models/user'
+import { client } from '@utils/s3'
 import formidable from 'formidable-serverless'
 import fs from 'fs'
 import jwt from 'jsonwebtoken'
-import { client } from '../../utils/s3'
 
 export const config = {
   api: {
