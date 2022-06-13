@@ -13,7 +13,12 @@ const authLink = setContext((_, { headers }) => {
 })
 
 const link = new HttpLink({
-  uri: 'http://localhost:3000/api/graphql/',
+  uri: () => {
+    if (process.env.GRAPHQL_URL) {
+      return `${process.env.GRAPHQL_URL}/api/graphql/`
+    }
+    return 'http://localhost:3000/api/graphql/'
+  },
   fetch,
 })
 
