@@ -45,7 +45,6 @@ export default function UserHome({ user }) {
         <CreatePost />
         <button onClick={logOutHandler}>log out</button>
         {allPost.map((post) => {
-          console.log(post)
           return (
             <Post
               id={post.id}
