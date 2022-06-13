@@ -21,12 +21,12 @@ export default function (request, response) {
         const fileStrem = fs.createReadStream(files.image.path)
         const fileName = Date.now() + files.image.name
         const uploadBucket = {
-          Bucket: process.env.AWS_BUCKET_NAME,
+          Bucket: process.env.BUCKET_NAME,
           Body: fileStrem,
           Key: fileName,
           ContentType: 'image/jpeg',
         }
-        const imgPath = `https://s3.${process.env.AWS_REGION}.amazonaws.com/${process.env.AWS_BUCKET_NAME}/${fileName}`
+        const imgPath = `https://s3.${process.env.REGION}.amazonaws.com/${process.env.BUCKET_NAME}/${fileName}`
         const token = jwt.verify(fields.token, process.env.JWT_KEY)
         await client.putObject(uploadBucket)
         await User.findById(token.id).updateOne({ imgPath: imgPath })
