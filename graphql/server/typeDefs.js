@@ -45,5 +45,6 @@ export default gql`
     addFriend(id: String): String
     addComment(text: String, postId: ID): String
     likeComment(commentId: String): String
+    deleteFriend(deleteId: String): String
   }
 `

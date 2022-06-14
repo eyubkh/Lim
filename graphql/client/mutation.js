@@ -40,3 +40,9 @@ export const LIKE_COMMENT = gql`
     likeComment(commentId: $commentId)
   }
 `
+
+export const DELETE_FRIEND = gql`
+  mutation deleteFriend($deleteId: String) {
+    deleteFriend(deleteId: $deleteId)
+  }
+`

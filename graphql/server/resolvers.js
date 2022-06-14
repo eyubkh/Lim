@@ -143,5 +143,13 @@ export default {
       await comment.save()
       return 'comment liked'
     },
+    async deleteFriend(root, args, ctx) {
+      if (!ctx) return null
+      const { deleteId } = args
+      const user = await User.findById(ctx.id)
+      user.friends = user.friends.filter((id) => id != deleteId)
+      user.save()
+      return 'friend deleted'
+    },
   },
 }
