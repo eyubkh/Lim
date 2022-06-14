@@ -130,5 +130,18 @@ export default {
       await newComment.save()
       return 'comment created'
     },
+    async likeComment(root, args, ctx) {
+      if (!ctx) return null
+      const { commentId } = args
+      const comment = await Comment.findById(commentId)
+      if (comment.likes.includes(ctx.id)) {
+        comment.likes = comment.likes.filter((id) => id != ctx.id)
+        await comment.save()
+        return 'comment unliked'
+      }
+      comment.likes = comment.likes.concat(ctx.id)
+      await comment.save()
+      return 'comment liked'
+    },
   },
 }

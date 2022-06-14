@@ -44,5 +44,6 @@ export default gql`
     friendSearch(text: String): [UserSearch]
     addFriend(id: String): String
     addComment(text: String, postId: ID): String
+    likeComment(commentId: String): String
   }
 `

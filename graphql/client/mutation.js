@@ -35,3 +35,8 @@ export const ADD_COMMENT = gql`
     addComment(text: $text, postId: $postId)
   }
 `
+export const LIKE_COMMENT = gql`
+  mutation likeComment($commentId: String) {
+    likeComment(commentId: $commentId)
+  }
+`
