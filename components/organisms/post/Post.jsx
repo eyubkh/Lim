@@ -1,23 +1,29 @@
-import { useMutation } from '@apollo/client'
 import DisplayText from '@components/atoms/displayText/DisplayText'
+import CommentTextField from '@components/molecules/commentTextField/CommentTextField'
+import CommentUser from '@components/molecules/commentUser/CommentUser'
 import UserPostInfo from '@components/molecules/userPostInfo/UserPostInfo'
-import { ADD_COMMENT } from '@graphql/client/mutation'
-import { GET_USER } from '@graphql/client/queries'
 import timeConversion from '@utils/timeConversion'
 import { useState } from 'react'
 import styled from 'styled-components'
 
 const Component = styled.div`
+  background-color: #f3f3f3;
+  .header {
+    border: solid 1px #33333344;
+    border-radius: 4px 4px 0px 0px;
+    border-bottom: none;
+    display: grid;
+    padding: 17px 26px;
+    gap: 17px;
+  }
+`
+
+const CommentBody = styled.div`
   display: grid;
   gap: 17px;
-  padding: 26px 26px;
-  background-color: #f3f3f3;
-  border-radius: 4px;
-  input {
-    background-color: transparent;
-    border: none;
-    outline: none;
-  }
+  padding: 17px 26px;
+  border: solid 1px #33333344;
+  border-bottom: none;
 `
 
 export default function Post({
@@ -28,48 +34,38 @@ export default function Post({
   iat,
   comments,
   likeCount,
-  isLiked,
+  userId,
+  likes,
 }) {
   const [showComments, setShowComments] = useState(false)
-  const [addComment] = useMutation(ADD_COMMENT, {
-    refetchQueries: [{ query: GET_USER }, 'userData'],
-  })
-
-  const addCommentHandler = (event) => {
-    event.preventDefault()
-    addComment({ variables: { text: event.target[0].value, postId: id } })
-    event.target[0].value = ''
-  }
-
   return (
     <Component>
-      <UserPostInfo
-        id={id}
-        username={username}
-        iat={timeConversion(iat)}
-        likeCount={likeCount}
-        commentCount={comments.length}
-        toggleComments={() => setShowComments(!showComments)}
-        image={image}
-        isLiked={isLiked}
-      />
-      <DisplayText size={'regular'}>{text}</DisplayText>
+      <div className="header">
+        <UserPostInfo
+          id={id}
+          username={username}
+          iat={timeConversion(iat)}
+          likeCount={likeCount}
+          commentCount={comments.length}
+          toggleComments={() => setShowComments(!showComments)}
+          image={image}
+          isLiked={likes.includes(userId)}
+        />
+        <DisplayText size={'regular'}>{text}</DisplayText>
+      </div>
       {showComments ? (
-        <>
-          <hr />
+        <CommentBody>
           {comments.map((comment) => (
-            <div key={comment.id}>
-              <p style={{ fontWeight: 'bold' }}>{comment.user.username}</p>
-              <p>{comment.text}</p>
-            </div>
+            <CommentUser
+              key={comment.id}
+              comment={comment}
+              isLiked={comment.likes.includes(userId)}
+            />
           ))}
-        </>
+        </CommentBody>
       ) : null}
-      <hr />
-      <form onSubmit={addCommentHandler}>
-        <input placeholder={'Add a comment...'} />
-        <button>send comment</button>
-      </form>
+
+      <CommentTextField id={id} />
     </Component>
   )
 }
