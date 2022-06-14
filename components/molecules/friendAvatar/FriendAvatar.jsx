@@ -5,6 +5,7 @@ import { ADD_FRIEND } from '@graphql/client/mutation'
 import { GET_USER } from '@graphql/client/queries'
 import Image from 'next/image'
 import styled from 'styled-components'
+import Dropbox from '../dropbox/Dropbox'
 
 const Component = styled.div`
   display: flex;
@@ -29,10 +30,12 @@ export default function FriendAvatar({ username, imagePath, id, isFriend }) {
   const [add] = useMutation(ADD_FRIEND, {
     refetchQueries: [{ query: GET_USER }, 'getUserData'],
   })
+
   const addFriend = (event) => {
     event.preventDefault()
     add({ variables: { addFriendId: id } })
   }
+
   return (
     <Component>
       <div>
@@ -45,7 +48,9 @@ export default function FriendAvatar({ username, imagePath, id, isFriend }) {
         <DisplayText size={'regular'}>{username}</DisplayText>
       </div>
       {isFriend ? (
-        ''
+        <Dropbox id={id}>
+          <Icon icon={'dots'} />
+        </Dropbox>
       ) : (
         <button onClick={addFriend}>
           <Icon icon={'add'} />
