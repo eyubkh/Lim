@@ -10,4 +10,5 @@ export const iconRules = [
   'comment',
   'send',
   'user',
+  'dots',
 ]
