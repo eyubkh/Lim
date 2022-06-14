@@ -5,7 +5,7 @@ export const ErrorHandlerContext = React.createContext({
   addError: () => {},
   removeError: () => {},
 })
-export function ErrorHandlerProvider({ children }) {
+export function ErrorHandlerProvider({ children, test }) {
   const [error, setError] = useState(null)
 
   const addError = (message) => setError(message)
@@ -18,7 +18,7 @@ export function ErrorHandlerProvider({ children }) {
   }
 
   return (
-    <ErrorHandlerContext.Provider value={contextValue}>
+    <ErrorHandlerContext.Provider value={test ? test : contextValue}>
       {children}
     </ErrorHandlerContext.Provider>
   )
