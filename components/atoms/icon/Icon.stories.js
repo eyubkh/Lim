@@ -10,12 +10,6 @@ export default {
       control: { type: 'radio' },
     },
   },
-  parameters: {
-    design: {
-      type: 'figma',
-      url: '',
-    },
-  },
 }
 
 const Template = (props) => <Component {...props} />
