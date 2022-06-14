@@ -8,7 +8,7 @@ import SideBar from '../organisms/sideBar/SideBar'
 const Component = styled.div`
   display: flex;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
   position: relative;
 `
 
@@ -55,7 +55,8 @@ export default function UserHome({ user }) {
               likeCount={post.likeCount}
               text={post.text}
               comments={post.comments}
-              isLiked={user?.userData.likes.includes(post.id)}
+              likes={post.likes}
+              userId={user?.userData.id}
             />
           )
         })}
