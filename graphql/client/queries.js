@@ -4,6 +4,7 @@ import { POST } from './types'
 export const GET_USER = gql`
   query getUserData {
     userData {
+      id
       username
       imgPath
       likes
