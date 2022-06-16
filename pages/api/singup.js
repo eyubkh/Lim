@@ -1,3 +1,4 @@
+import Notification from '@models/notification'
 import User from '@models/user'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
@@ -12,7 +13,7 @@ const handler = async (request, response) => {
     if (username.length < 4) throw new Error('Username too short')
     if (password.length < 4) throw new Error('Password too short')
     const passHash = await bcrypt.hash(password, 10)
-    const newUser = new User({
+    const user = new User({
       username,
       password: passHash,
       imgPath:
@@ -21,14 +22,23 @@ const handler = async (request, response) => {
       friends: [],
       posts: [],
     })
-    await newUser.save().catch((error) => {
+
+    const notification = await Notification({
+      user: user.id,
+      notifi: [],
+      notifiCount: 0,
+    })
+    await user.save().catch((error) => {
+      throw new Error(error)
+    })
+    await notification.save().catch((error) => {
       throw new Error(error)
     })
 
     const jwtPlainObject = {
-      username: newUser.username,
-      password: newUser.password,
-      id: newUser.id,
+      username: user.username,
+      password: user.password,
+      id: user.id,
     }
     const jwtDecodeObject = jwt.sign(jwtPlainObject, process.env.JWT_KEY)
 
