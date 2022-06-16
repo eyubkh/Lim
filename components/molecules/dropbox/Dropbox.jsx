@@ -49,7 +49,7 @@ export default function Dropbox({ id, children }) {
   const [delet] = useMutation(DELETE_FRIEND, {
     refetchQueries: [{ query: GET_USER }, 'getUserData'],
   })
-  let target = id.substring(5)
+  let target = id.substring(3)
 
   const deleteFriendHandler = (event) => {
     event.preventDefault()
