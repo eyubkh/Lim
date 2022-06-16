@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
-import client from '../../apollo-client'
 import CreatePost from '../organisms/createPost/CreatePost'
 import Post from '../organisms/post/Post'
 import SideBar from '../organisms/sideBar/SideBar'
@@ -15,6 +14,7 @@ const Component = styled.div`
 const Section = styled.section`
   width: 600px;
   display: flex;
+  z-index: 1;
   flex-direction: column;
   gap: 44px;
   padding: 44px 0px 44px 26px;
@@ -22,28 +22,20 @@ const Section = styled.section`
 
 export default function UserHome({ user }) {
   const router = useRouter()
-  const logOutHandler = async () => {
-    window.localStorage.removeItem('token')
-    await client.clearStore()
-    router.push('/')
-  }
 
   const friendPost = user?.userData.friends.map((user) => user.posts)
   const userPost = user?.userData.posts
   const allPost = [...userPost, ...friendPost.flat(2)]
   return (
     <Component>
-      <div className="sideBar">
-        <SideBar
-          id={user?.userData.id}
-          username={user?.userData.username}
-          imagePath={user?.userData.imgPath}
-          friends={user?.userData.friends}
-        />
-      </div>
+      <SideBar
+        id={user?.userData.id}
+        username={user?.userData.username}
+        imagePath={user?.userData.imgPath}
+        friends={user?.userData.friends}
+      />
       <Section>
         <CreatePost />
-        <button onClick={logOutHandler}>log out</button>
         {allPost.map((post) => {
           return (
             <Post
