@@ -5,12 +5,12 @@ import sendImage from '@utils/sendImage'
 import Image from 'next/image'
 import { useState } from 'react'
 import styled from 'styled-components'
+import NotifiacationDropbox from '../notificationDropbox/NotificationDropbox'
 
 const Components = styled.div`
   display: flex;
   gap: 17px;
   align-items: center;
-  overflow: hidden;
   .avatarImage {
     height: 72px;
     width: 72px;
@@ -71,9 +71,7 @@ export default function UserAvatar({ username, imagePath }) {
           <StyleText bold>{username}</StyleText>
         </DisplayText>
         <span>
-          <Icon icon={'user'} />
-          <Icon icon={'comment'} />
-          <Icon icon={'like'} />
+          <NotifiacationDropbox />
         </span>
       </div>
     </Components>
