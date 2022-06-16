@@ -41,7 +41,7 @@ export default function CreatePost({}) {
 
   return (
     <Component onSubmit={sumbitHandler}>
-      <TextareaAutosize placeholder="What's happening?..." />
+      <TextareaAutosize placeholder="What's happening?" />
       <button>
         <Icon icon={'add'} />
       </button>
