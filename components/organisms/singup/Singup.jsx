@@ -26,13 +26,14 @@ export default function Singup({ toggleForm }) {
       username: event.target[1].value,
       password: event.target[2].value,
     }
-    const response = await postApiCredentials('api/singup', formData)
-    if (response.jwt) {
-      window.localStorage.setItem('token', response.jwt)
-      router.push('/home')
-    } else {
-      addError(response.message)
-    }
+    await postApiCredentials('api/singup', formData)
+      .then((response) => {
+        window.localStorage.setItem('token', response.jwt)
+        router.push('/home')
+      })
+      .catch((error) => {
+        addError(error.message)
+      })
   }
 
   return (
