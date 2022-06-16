@@ -18,7 +18,7 @@ const handler = async (request, response) => {
       id: user.id,
     }
     const token = jwt.sign(object, process.env.JWT_KEY)
-    response.send({ jwt: token })
+    response.status(200).send({ jwt: token })
   } catch (error) {
     errorHandler(error, response)
   }
