@@ -11,4 +11,5 @@ export const iconRules = [
   'send',
   'user',
   'dots',
+  'exit',
 ]
