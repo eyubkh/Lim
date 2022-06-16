@@ -1,4 +1,5 @@
 import Comment from '@models/comment'
+import Notification from '@models/notification'
 import Post from '@models/post'
 import User from '@models/user'
 import { UserInputError } from 'apollo-server-micro'
@@ -60,6 +61,17 @@ export default {
       if (!user) throw new UserInputError('not user found')
       return user
     },
+    async userNotification(root, args, ctx) {
+      if (!ctx) return null
+      return await Notification.findOne({ user: ctx.id })
+    },
+    async resetNotification(root, args, ctx) {
+      if (!ctx) return null
+      const notification = await Notification.findOne({ user: ctx.id })
+      notification.notifiCount = 0
+      await notification.save()
+      return 'reset'
+    },
   },
   Mutation: {
     async createPost(root, args, ctx) {
@@ -76,7 +88,7 @@ export default {
       user.posts = user.posts.concat(newPost.id)
       await newPost.save()
       await user.save()
-      return newPost
+      // return newPost
     },
     async like(root, args, ctx) {
       if (!ctx) return null
@@ -126,8 +138,16 @@ export default {
       })
       const post = await Post.findById(postId)
       post.comments = post.comments.concat(newComment.id)
+      const notification = await Notification.findOne({ user: post.user })
+      notification.notifi = notification.notifi.concat({
+        username: ctx.username,
+        message: 'commented in your post',
+        read: false,
+      })
+      notification.notifiCount += 1
       await post.save()
       await newComment.save()
+      await notification.save()
       return 'comment created'
     },
     async likeComment(root, args, ctx) {
@@ -139,6 +159,14 @@ export default {
         await comment.save()
         return 'comment unliked'
       }
+      const notification = await Notification.findOne({ user: comment.user })
+      notification.notifi = notification.notifi.concat({
+        username: ctx.username,
+        message: 'liked your comment',
+        read: false,
+      })
+      notification.notifiCount += 1
+      notification.save()
       comment.likes = comment.likes.concat(ctx.id)
       await comment.save()
       return 'comment liked'

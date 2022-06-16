@@ -6,6 +6,18 @@ export default gql`
     username: String
     password: String
   }
+
+  type netifiContent {
+    username: String
+    message: String
+    read: Boolean
+  }
+
+  type Notification {
+    id: ID
+    notifi: [netifiContent]
+    notifiCount: Int
+  }
   type Comment {
     id: ID
     user: User
@@ -37,6 +49,8 @@ export default gql`
   }
   type Query {
     userData: User
+    userNotification: Notification
+    resetNotification: String
   }
   type Mutation {
     createPost(text: String): Post
