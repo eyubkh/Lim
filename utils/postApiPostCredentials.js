@@ -8,4 +8,8 @@ export default async function postApiCredentials(route, object) {
       body: JSON.stringify(object),
     })
     .then((response) => response.json())
+    .then((response) => {
+      if (response.message) throw new Error(response.message)
+      return response
+    })
 }

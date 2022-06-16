@@ -25,13 +25,14 @@ export default function Login({ toggleForm }) {
       username: event.target[0].value,
       password: event.target[1].value,
     }
-    const response = await postApiCredentials('api/auth/login', formData)
-    if (response.jwt) {
-      window.localStorage.setItem('token', response.jwt)
-      router.push('/home')
-    } else {
-      addError(response.message)
-    }
+    await postApiCredentials('api/auth/login', formData)
+      .then((response) => {
+        window.localStorage.setItem('token', response.jwt)
+        router.push('/home')
+      })
+      .catch((error) => {
+        addError(error.message)
+      })
   }
 
   return (
