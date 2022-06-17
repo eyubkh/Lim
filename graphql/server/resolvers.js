@@ -115,7 +115,7 @@ export default {
       const users = await User.find({
         username: { $regex: text },
         _id: { $nin: [...friends, ctx.id] },
-      })
+      }).sort({ username: 1 })
       if (text.length === 0) return []
       return users
     },
