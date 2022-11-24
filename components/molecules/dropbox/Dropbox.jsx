@@ -29,9 +29,10 @@ const Component = styled.div`
     color: #f25252;
   }
 
-  ${(props) => '#' + props.target}:checked ~ .dropdown-content {
+  input[type=checkbox]:checked ~ .dropdown-content {
     display: block;
   }
+
   .dropdown-content::before {
     content: '';
     position: absolute;
