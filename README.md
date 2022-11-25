@@ -22,7 +22,7 @@ Front-end
 
 Back-end
   - MongoDb
-  - GrapQL
+  - GraphQL
   - Jest 
   - Json Web Token
   - Bycrpt
