@@ -1,6 +1,6 @@
 <div id="desc">
   <h1>Lim</h1>
-  <p><a href="lim-project.vercel.app/" target="_blank"></a>Lim is a social networking platform that allows users to connect with each other and share content. With Lim, users can create and publish their own posts, customize their profile with a profile picture, and interact with other users by commenting on and liking their posts. Users can also search for and add new friends to their network, expanding their connections and access to shared content.</p>
+  <p><a href="lim-project.vercel.app/" target="_blank">Lim</a> is a social networking platform that allows users to connect with each other and share content. With Lim, users can create and publish their own posts, customize their profile with a profile picture, and interact with other users by commenting on and liking their posts. Users can also search for and add new friends to their network, expanding their connections and access to shared content.</p>
   <a href="https://youtu.be/WdJOcVGNUlM" target="_blank">
   <image src="https://user-images.githubusercontent.com/66533853/216764404-3bae52dc-afc6-435c-9707-ca50949398f9.gif" alt="Browsing the Lim website using a GIF" />
   </a>
